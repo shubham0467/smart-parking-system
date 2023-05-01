@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Dashboard Price</title>
+    <link rel="stylesheet" href="static\images\style.css">
+  </head>
+  <body>
+    <div class="banner">
+      <div class="navbar">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
+          <ul>
+            <li><a href="/homePage" data-dismiss="modal" data-toggle="modal">Home</a></li>
+            <li>
+                <a onclick="toggleBalanceBox()" class="wallet-link">
+                  <i class="fa fa-google-wallet" aria-hidden="true"></i>
+                  <span class="wallet-label">Wallet</span>  
+                </a> 
+             </li> 
+             
+
+             <li>
+               <form action="/logout" method="POST">
+                 <button type="submit" class="btn btn-link text-danger">
+                   <i class="fa fa-sign-out" aria-hidden="true"></i>
+                 </button>
+               </form>
+              </li>
+        
+              <div id="balance-box" class="balance-box" >
+                <!-- Balance Heading -->
+                <div class="wallet-header">
+                  <h6 class="balance-heading">Current Balance:</h6>
+                  <p class="balance-amount"> {{ session['balance'] }}</p>
+                </div>
+              <br>
+              <!-- Balance Addition Form -->
+              <div id="registerModal" class="modal-style modal">
+                <div class="modal-dialog modal-login">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <form method="post" action="/add_funds" name="add_funds">
+                        <div class="form-group mt-3 mb-3">
+                          <div class="input-group">
+                            <label for="amount" class="amount-label">AMOUNT:</label>
+                            <br>
+                            <input
+                              type="float"
+                              class="form-control"
+                              name="amount"
+                              placeholder="Enter Amount"
+                              required="required"
+                            />
+                          </div>
+                        </div>
+            
+                        <div class="form-group text-center">
+                          <button
+                            id="signup-button"
+                            type="submit"
+                            class="btn btn-dark btn-md"
+                          >
+                            Add Amount
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           </ul>
+       </div>
+
+      <h1 class="dashboard-title">Welcome to your Dashboard, {{ session['user_name'] }}!</h1>
+            <div class="user-info">
+              <h2>User Information</h2>
+              <ul>
+                <li><strong>User Name:</strong> {{ session['user_name'] }}</li>
+                <li><strong>Email ID:</strong> {{ session['email_id'] }}</li>
+                <li><strong>Vehicle Number:</strong> {{ session['vehicle_number'] }}</li>
+                <li><strong>Balance:</strong> {{ session['balance'] }}</li>
+              </ul>
+            </div>
+
+
+
+           
+            
+            
+            
+            
+
+
+        
+            
+            <script>
+              function toggleBalanceBox() {
+                var balanceBox = document.getElementById("balance-box");
+                if (balanceBox.style.display === "none") {
+                  balanceBox.style.display = "block";
+
+                } else {
+                  balanceBox.style.display = "none";
+                }
+              }
+            
+              </script>
+              
+  </body>
+</html>
